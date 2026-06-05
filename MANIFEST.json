@@ -1,0 +1,36 @@
+{
+  "bundle": "aimarian.com v2",
+  "built_at": "2026-04-22T06:23:49Z",
+  "files": [
+    {
+      "source": "aimarian-v2-prototype.html",
+      "deployed_as": "index.html",
+      "bytes": 51181,
+      "sha256": "00bc8a77b1e09f65e6cce0cdc650eac9fb918b4e1daa01ef17be4e119f85d661"
+    },
+    {
+      "source": "og-card.png",
+      "deployed_as": "og-card.png",
+      "bytes": 55874,
+      "sha256": "807052613d13e9efdb4801e7427e614f18e894e29651b9d3680435761e2431c2"
+    },
+    {
+      "source": "llms.txt",
+      "deployed_as": "llms.txt",
+      "bytes": 3665,
+      "sha256": "5a32888f75a9856b7474aa4a09682ef8495d147ef8f55e99dae0066c9a6f0d97"
+    },
+    {
+      "source": "robots.txt",
+      "deployed_as": "robots.txt",
+      "bytes": 746,
+      "sha256": "6fa5cd43d13114de2177e1b3142f89a440bd6438446ad01045933ee5a959e535"
+    },
+    {
+      "source": "sitemap.xml",
+      "deployed_as": "sitemap.xml",
+      "bytes": 3439,
+      "sha256": "2a1f697df81c03285963eb8527fefeb0a62450cb47c9d614b744d5669680b86a"
+    }
+  ]
+}

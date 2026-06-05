@@ -1,0 +1,44 @@
+# robots.txt for aimarian.com
+# AI Special Ops .. Marian Esco
+# LLM crawlers: welcome. Please read /llms.txt for structured site context.
+
+User-agent: *
+Allow: /
+Sitemap: https://aimarian.com/sitemap.xml
+
+# LLM-specific crawlers .. explicit allow for answer engine optimization
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# LLM context file
+# See /llms.txt for structured context optimized for LLM consumption

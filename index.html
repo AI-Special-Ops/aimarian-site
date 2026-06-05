@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marian Esco .. AI agent practitioner</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0D1117;
+            color: #C9D1D9;
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+        h1 { font-size: 3.2rem; font-weight: 700; letter-spacing: -1.5px; margin-bottom: 0.4rem; }
+        h2 { font-size: 1.8rem; font-weight: 600; margin-bottom: 1.2rem; color: #C9D1D9; letter-spacing: -0.5px; }
+        h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.6rem; color: #C9D1D9; }
+        p { font-size: 1rem; margin-bottom: 1rem; color: #8B949E; line-height: 1.75; }
+        .subtitle { font-size: 1.15rem; color: #8B949E; font-weight: 400; margin-top: 0.8rem; }
+        .mono { font-family: 'SF Mono', 'Monaco', 'Menlo', monospace; font-size: 0.92rem; color: #3FB950; }
+
+        section {
+            min-height: auto;
+            padding: 4.5rem 4rem;
+            opacity: 0;
+            animation: fadeIn 0.7s ease-out forwards;
+            border-bottom: 1px solid #21262D;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+        section:nth-child(5) { animation-delay: 0.5s; }
+        section:nth-child(6) { animation-delay: 0.6s; }
+        section:nth-child(7) { animation-delay: 0.7s; }
+
+        .container { max-width: 1100px; margin: 0 auto; width: 100%; }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, rgba(63, 185, 80, 0.04) 0%, rgba(88, 166, 255, 0.03) 100%);
+            position: relative;
+            overflow: hidden;
+            padding-top: 6rem;
+            padding-bottom: 5rem;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(63, 185, 80, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -180px; right: -200px;
+            pointer-events: none;
+        }
+        .hero h1 {
+            background: linear-gradient(90deg, #3FB950 0%, #58A6FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-role { font-size: 1rem; color: #8B949E; margin: 0.4rem 0 1.2rem; font-family: 'SF Mono', 'Monaco', 'Menlo', monospace; }
+        .hero-body { max-width: 720px; font-size: 1.05rem; color: #C9D1D9; line-height: 1.8; }
+
+        /* TIMELINE */
+        .timeline {
+            background: #0D1117;
+            padding: 3.5rem 4rem;
+        }
+        .timeline-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 900px;
+            margin: 2rem auto 0;
+            position: relative;
+        }
+        .timeline-row::before {
+            content: '';
+            position: absolute;
+            left: 8%; right: 8%;
+            top: 12px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #30363D 20%, #30363D 80%, transparent);
+        }
+        .tl-beat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .tl-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: #30363D;
+            border: 2px solid #0D1117;
+            margin-bottom: 0.8rem;
+        }
+        .tl-beat.edge .tl-dot {
+            width: 14px; height: 14px;
+            background: #3FB950;
+            box-shadow: 0 0 0 4px rgba(63, 185, 80, 0.15);
+        }
+        .tl-year { font-size: 0.85rem; font-weight: 700; color: #C9D1D9; letter-spacing: 0.5px; font-family: 'SF Mono', 'Monaco', 'Menlo', monospace; }
+        .tl-label { font-size: 0.8rem; color: #8B949E; margin-top: 0.2rem; }
+
+        /* OBSERVATION */
+        .observation { background: #0D1117; }
+        .obs-body {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #C9D1D9;
+            max-width: 760px;
+            font-weight: 400;
+        }
+        .obs-mute { color: #8B949E; }
+
+        /* TWO DOORS DIAGRAM */
+        .doors {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2.5rem;
+            max-width: 900px;
+        }
+        .door {
+            padding: 2rem 1.8rem;
+            border-radius: 8px;
+            border: 1px solid #30363D;
+            background: #0D1117;
+        }
+        .door.focus {
+            border-color: #3FB950;
+            background: linear-gradient(135deg, rgba(63, 185, 80, 0.04) 0%, transparent 100%);
+        }
+        .door-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #8B949E;
+            margin-bottom: 0.8rem;
+        }
+        .door.focus .door-label { color: #3FB950; }
+        .door-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #C9D1D9;
+            margin-bottom: 1rem;
+            font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
+        }
+        .door.focus .door-title { color: #3FB950; }
+        .door-body {
+            font-size: 0.95rem;
+            color: #8B949E;
+            line-height: 1.7;
+        }
+
+        /* STATS */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+            max-width: 900px;
+        }
+        .stat {
+            text-align: left;
+        }
+        .stat-num {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #3FB950;
+            font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
+            letter-spacing: -0.5px;
+        }
+        .stat-desc {
+            font-size: 0.78rem;
+            color: #8B949E;
+            margin-top: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* HANDOFF DIAGRAM */
+        .handoff {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 2.5rem 0 1rem;
+            max-width: 900px;
+            position: relative;
+        }
+        .ho-actor {
+            width: 64px; height: 64px;
+            border-radius: 50%;
+            border: 1.5px solid #30363D;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0D1117;
+            font-size: 0.7rem;
+            color: #8B949E;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 1;
+            font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
+            padding: 0 4px;
+        }
+        .ho-actor.edge { border-color: #3FB950; color: #3FB950; }
+        .ho-arrow {
+            flex: 1;
+            height: 1px;
+            background: #30363D;
+            position: relative;
+            margin: 0 -2px;
+        }
+        .ho-gate {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            width: 16px; height: 16px;
+            background: #0D1117;
+            border: 1.5px solid #BC8CFF;
+        }
+        .ho-gate-label {
+            position: absolute;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.65rem;
+            color: #BC8CFF;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
+            white-space: nowrap;
+        }
+
+        /* STACK CARDS */
+        .stack {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+        .stack-card {
+            padding: 1.5rem 1.3rem;
+            border-radius: 8px;
+            border: 1px solid #30363D;
+            background: #0D1117;
+            transition: all 0.25s ease;
+        }
+        .stack-card:hover {
+            border-color: #3FB950;
+            transform: translateY(-2px);
+        }
+        .stack-label {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #8B949E;
+            margin-bottom: 0.5rem;
+            font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
+        }
+        .stack-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #C9D1D9;
+            margin-bottom: 0.5rem;
+        }
+        .stack-desc {
+            font-size: 0.85rem;
+            color: #8B949E;
+            line-height: 1.6;
+        }
+
+        /* CAPTURE FUNNEL */
+        .funnel-wrap {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin: 2rem 0 1rem;
+            max-width: 900px;
+        }
+        .funnel-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .funnel-input {
+            font-size: 0.78rem;
+            color: #8B949E;
+            font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
+            padding: 0.3rem 0.7rem;
+            border-left: 2px solid #30363D;
+        }
+        .funnel-arrows {
+            flex: 0.3;
+            font-size: 1.2rem;
+            color: #3FB950;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        .funnel-out {
+            padding: 1.2rem 2rem;
+            border: 1.5px solid #3FB950;
+            border-radius: 6px;
+            background: rgba(63, 185, 80, 0.05);
+            color: #3FB950;
+            font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* CONTEXT SECTION */
+        .context { background: #0D1117; }
+        .ctx-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.8rem;
+        }
+        .ctx-card {
+            padding: 1.3rem 1.4rem;
+            border: 1px solid #30363D;
+            border-left: 2px solid #BC8CFF;
+            border-radius: 4px;
+            background: #0D1117;
+        }
+        .ctx-card h3 { color: #BC8CFF; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 0.5rem; font-family: 'SF Mono', 'Monaco', 'Menlo', monospace; }
+        .ctx-card p { font-size: 0.92rem; color: #8B949E; line-height: 1.65; margin: 0; }
+
+        /* CLOSING */
+        .closing { background: #0D1117; padding: 5rem 4rem; }
+        .closing-body {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: #C9D1D9;
+            max-width: 760px;
+            margin-bottom: 2rem;
+        }
+        .soft-cta {
+            display: inline-block;
+            color: #3FB950;
+            border: 1px solid #3FB950;
+            padding: 0.75rem 1.8rem;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            font-weight: 500;
+            font-size: 0.92rem;
+            font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
+            margin-right: 0.8rem;
+        }
+        .soft-cta:hover { background: #3FB950; color: #0D1117; }
+
+        /* FOOTER */
+        footer {
+            background: #0D1117;
+            padding: 2.5rem 4rem;
+            text-align: center;
+            border-top: 1px solid #21262D;
+        }
+        .footer-name { font-size: 1.1rem; font-weight: 600; color: #C9D1D9; margin-bottom: 0.3rem; }
+        .footer-email { font-family: 'SF Mono', 'Monaco', 'Menlo', monospace; color: #3FB950; font-size: 0.85rem; margin-bottom: 0.8rem; }
+        .footer-credit { font-size: 0.75rem; color: #8B949E; margin-top: 1rem; }
+        .footer-credit a { color: #8B949E; text-decoration: none; border-bottom: 1px dotted #30363D; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            h1 { font-size: 2.6rem; }
+            h2 { font-size: 1.6rem; }
+            .stack, .doors, .ctx-grid { grid-template-columns: 1fr 1fr; }
+            .stats-row { grid-template-columns: repeat(5, 1fr); gap: 0.8rem; }
+            .stat-num { font-size: 1.6rem; }
+            section { padding: 3.5rem 2rem; }
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.4rem; }
+            .stack, .doors, .ctx-grid { grid-template-columns: 1fr; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+            .timeline-row { flex-wrap: wrap; gap: 1.2rem; justify-content: center; }
+            .timeline-row::before { display: none; }
+            .handoff { flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+            .ho-arrow { min-width: 20px; }
+            .funnel-wrap { flex-direction: column; align-items: flex-start; }
+            .funnel-arrows { transform: rotate(90deg); }
+            section, .timeline, .closing, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <h1>Marian Esco</h1>
+            <div class="hero-role">AI agent practitioner  ..  hands on keyboard since 2017</div>
+            <div class="hero-body">
+                I build with AI every day. In production. What you see here is a writeup of the systems I actually run, not a pitch. The space moves fast and that's the fun part.. I'm still learning.
+            </div>
+        </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="timeline">
+        <div class="container">
+            <div class="timeline-row">
+                <div class="tl-beat edge">
+                    <div class="tl-dot"></div>
+                    <div class="tl-year">2017</div>
+                    <div class="tl-label">tensorflow</div>
+                </div>
+                <div class="tl-beat">
+                    <div class="tl-dot"></div>
+                    <div class="tl-year">2020</div>
+                    <div class="tl-label">prod ML</div>
+                </div>
+                <div class="tl-beat">
+                    <div class="tl-dot"></div>
+                    <div class="tl-year">2023</div>
+                    <div class="tl-label">LLMs</div>
+                </div>
+                <div class="tl-beat">
+                    <div class="tl-dot"></div>
+                    <div class="tl-year">2024</div>
+                    <div class="tl-label">agents</div>
+                </div>
+                <div class="tl-beat edge">
+                    <div class="tl-dot"></div>
+                    <div class="tl-year">2026</div>
+                    <div class="tl-label">runtime</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OBSERVATION -->
+    <section class="observation">
+        <div class="container">
+            <h2>What I keep noticing</h2>
+            <div class="obs-body">
+                Most teams have auth figured out. Identity, credentials, the WHO layer. That's solved. <span class="obs-mute">The layer I keep working on is the other one.. what each agent is actually doing, per action, per tool, logged at the moment it happens.</span>
+            </div>
+            <div class="doors">
+                <div class="door">
+                    <div class="door-label">most have</div>
+                    <div class="door-title">WHO</div>
+                    <div class="door-body">auth<br>identity<br>credentials</div>
+                </div>
+                <div class="door focus">
+                    <div class="door-label">where I spend time</div>
+                    <div class="door-title">WHAT</div>
+                    <div class="door-body">every action, per tool,<br>per scope, logged<br>at the moment</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IN THE GRAPH -->
+    <section class="observation">
+        <div class="container">
+            <h2>What's in the graph right now</h2>
+            <p>Single vault. Everything links to everything. Kept current by the system itself.</p>
+            <div class="stats-row">
+                <div class="stat">
+                    <div class="stat-num">81+</div>
+                    <div class="stat-desc">vault notes</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">531+</div>
+                    <div class="stat-desc">wikilinks</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">34</div>
+                    <div class="stat-desc">decisions</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">10+</div>
+                    <div class="stat-desc">integrations</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">1+ yr</div>
+                    <div class="stat-desc">in prod</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CAPTURE FUNNEL -->
+    <section class="observation">
+        <div class="container">
+            <h2>How capture works</h2>
+            <p>Seven input layers feed one graph. The graph feeds everything else.. local AI, agents, daily briefs. That's how I stay in context without losing signal.</p>
+            <div class="funnel-wrap">
+                <div class="funnel-inputs">
+                    <div class="funnel-input">terminal</div>
+                    <div class="funnel-input">voice</div>
+                    <div class="funnel-input">mobile notes</div>
+                    <div class="funnel-input">reminders</div>
+                    <div class="funnel-input">calendar</div>
+                    <div class="funnel-input">desktop</div>
+                    <div class="funnel-input">evening log</div>
+                </div>
+                <div class="funnel-arrows">→ → →</div>
+                <div class="funnel-out">graph</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STACK -->
+    <section class="observation">
+        <div class="container">
+            <h2>The stack I run</h2>
+            <div class="stack">
+                <div class="stack-card">
+                    <div class="stack-label">brain .. vault</div>
+                    <div class="stack-title">Single source of truth</div>
+                    <div class="stack-desc">Obsidian. Dataview + Templater + graph. Everything links.</div>
+                </div>
+                <div class="stack-card">
+                    <div class="stack-label">local ai</div>
+                    <div class="stack-title">Open WebUI + Ollama</div>
+                    <div class="stack-desc">RAG on 104 files. Custom model, source citations, offline.</div>
+                </div>
+                <div class="stack-card">
+                    <div class="stack-label">orchestration</div>
+                    <div class="stack-title">Claude Cowork</div>
+                    <div class="stack-desc">MCP gateway. Multi-agent handoffs, structured, logged.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HANDOFF PATTERN -->
+    <section class="observation">
+        <div class="container">
+            <h2>The handoff pattern</h2>
+            <p>Five actors. Two approval gates. Same shape for any workflow.. pipeline, outreach, research, content.</p>
+            <div class="handoff">
+                <div class="ho-actor edge">intake</div>
+                <div class="ho-arrow">
+                    <div class="ho-gate"></div>
+                    <div class="ho-gate-label">scope</div>
+                </div>
+                <div class="ho-actor">triage</div>
+                <div class="ho-arrow"></div>
+                <div class="ho-actor">draft</div>
+                <div class="ho-arrow">
+                    <div class="ho-gate"></div>
+                    <div class="ho-gate-label">audit</div>
+                </div>
+                <div class="ho-actor">review</div>
+                <div class="ho-arrow"></div>
+                <div class="ho-actor edge">send</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTEXT / WHAT THIS IS -->
+    <section class="context">
+        <div class="container">
+            <h2>What this is, concretely</h2>
+            <p>Not a demo. Not a prototype. The system I run every day, written up for people who want to see the shape of it.</p>
+            <div class="ctx-grid">
+                <div class="ctx-card">
+                    <h3>portable</h3>
+                    <p>The whole thing fits on a USB stick. From minute 0 it starts learning the new machine and your rhythm.</p>
+                </div>
+                <div class="ctx-card">
+                    <h3>in production</h3>
+                    <p>Live pipeline. Automated briefings. Full traceability. This is the infrastructure I actually depend on.</p>
+                </div>
+                <div class="ctx-card">
+                    <h3>extensible</h3>
+                    <p>Add agents, rules, integrations as the engagement calls for them. The handoff shape holds.</p>
+                </div>
+                <div class="ctx-card">
+                    <h3>documented</h3>
+                    <p>34 architectural decisions, each with the context that forced it. Tools change.. the pattern tends to hold.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLOSING -->
+    <section class="closing">
+        <div class="container">
+            <h2>If it's interesting</h2>
+            <div class="closing-body">
+                60 min. No commitment. I walk in, we look at what your agents are doing, you walk out with a gap analysis and an honest go / no-go. Low pressure. High signal. The fun part starts when we find the thing that's been bugging you for six months.
+            </div>
+            <a href="mailto:AImarian@proton.me" class="soft-cta">AImarian@proton.me</a>
+            <a href="https://www.linkedin.com/in/connecter/" class="soft-cta" target="_blank">linkedin.com/in/connecter</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-name">Marian Esco</div>
+            <div class="footer-email">AImarian@proton.me</div>
+            <div class="footer-credit">built with the system it describes</div>
+        </div>
+    </footer>
+
+</body>
+</html>
